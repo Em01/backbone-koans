@@ -2,12 +2,13 @@ describe('About Backbone.Collection', function() {
     it('Can add Model instances as objects one at a time, or as arrays of models.', function() {
         var todos = new TodoList();
 
-        expect(todos.length).toBe('FIX ME');
+        expect(todos.length).toBe(0);
 
         todos.add({ text: 'Clean the kitchen' });
 
-        expect(todos.length).toBe('FIX ME');
+        expect(todos.length).toBe(1);
 
+        todos.add([list1, list2]);
         // How would you add multiple models to the collection with a single method call?
 
         expect(todos.length).toBe(3);

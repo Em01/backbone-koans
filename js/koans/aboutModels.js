@@ -9,10 +9,10 @@ describe('About Backbone.Model', function() {
         var todo = new Todo();
 
         var defaultAttrs = {
-            text: 'What is the default value?',
-            done : 'What is the default value?',
-            order: 'What is the default value?'
-        }
+            text: '',
+            done:  false,
+            order: 0
+        };
 
         expect(defaultAttrs).toEqual(todo.attributes);
     });
@@ -20,7 +20,7 @@ describe('About Backbone.Model', function() {
     it('Attributes can be set on the model instance when it is created.', function() {
         var todo = new Todo({ text: 'Get oil change for car.' });
 
-        expect(todo.get('text')).toEqual('FIX ME');
+        expect(todo.get('text')).toEqual('Get oil change for car.');
     });
 
     it('If it is exists, an initialize function on the model will be called when it is created.', function() {
@@ -31,7 +31,7 @@ describe('About Backbone.Model', function() {
         var todo = new Todo({ text: 'Stop monkeys from throwing their own feces!' });
 
         actualText = 'Stop monkeys from throwing their own double rainbows!'; // Don't change
-        expect(todo.get('text')).toBe(actualText);
+        expect(todo.get('text')).toBe('Stop monkeys from throwing their own feces!');
     });
 
     it('Fires a custom event when the state changes.', function() {
@@ -40,6 +40,7 @@ describe('About Backbone.Model', function() {
         var todo = new Todo();
 
         todo.on('change', callback);
+        todo.set({order: 1});
 
         // How would you update a property on the todo here?
         // Hint: http://documentcloud.github.com/backbone/#Model-set
@@ -53,6 +54,7 @@ describe('About Backbone.Model', function() {
         var todo = new Todo();
 
         todo.on('error', errorCallback);
+        todo.set({done: 1});
 
         // What would you need to set on the todo properties to cause validation to fail?
         // Refer to Todo.validate in js/todos.js to see the logic.
